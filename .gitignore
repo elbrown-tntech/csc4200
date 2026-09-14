@@ -1,0 +1,66 @@
+# =============================================================================
+# CSC 4200 / 5200 — .gitignore for the COURSE repository
+#
+# This guards the repository students clone. It is not the file students copy
+# into their own assignment repositories — that one is
+# templates/assignment-gitignore.
+# =============================================================================
+
+# --- Operating system junk ---------------------------------------------------
+# .DS_Store is created by the macOS Finder every time a folder is opened. It
+# is already present in this working tree; add it here before the next
+# `git add .` commits it.
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+__MACOSX/
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# --- Editors -----------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Build output from starter code ------------------------------------------
+# Starter skeletons ship source and a Makefile. Anything the Makefile produces
+# stays out of the repository.
+*.o
+*.obj
+*.a
+*.so
+*.exe
+*.out
+build/
+bin/
+obj/
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# --- LaTeX build artifacts ---------------------------------------------------
+# Only relevant if handout sources are ever kept here alongside the PDFs.
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.log
+*.out
+
+# --- Scratch -----------------------------------------------------------------
+scratch/
+tmp/
+*.bak
