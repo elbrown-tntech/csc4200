@@ -1,0 +1,116 @@
+# =============================================================================
+# CSC 4200 / 5200 — .gitignore for programming assignment repositories
+#
+# Copy this file into your assignment repository BEFORE your first commit:
+#
+#     cp ~/csc4200-course/templates/assignment-gitignore \
+#        ~/csc4200-work/csc4200-pa1-yourname/.gitignore
+#
+# Note the rename: it must be called .gitignore in your repository, with the
+# leading dot. Git only reads it under that name.
+#
+# Why this matters: both programming assignments award 20 of 100 points for
+# version control practice. A history full of compiled binaries and editor
+# junk obscures the work you actually did, and a repository containing a
+# virtual environment can run to hundreds of megabytes.
+#
+# Commit your SOURCE. Never commit what a build produces.
+# =============================================================================
+
+# --- Compiled output ---------------------------------------------------------
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dylib
+*.exe
+*.out
+*.app
+
+# Binaries produced by the assignment Makefiles. If your executable has a
+# different name, add it here — or better, keep all output in a build/ folder.
+server
+client
+pa1
+pa2
+build/
+bin/
+obj/
+
+# --- Debug and profiling artifacts -------------------------------------------
+*.dSYM/
+*.su
+*.idb
+*.pdb
+core
+core.*
+vgcore.*
+valgrind-out.txt
+*.gcda
+*.gcno
+*.gcov
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# --- Editors and IDEs --------------------------------------------------------
+.vscode/
+.vscode-server/
+.idea/
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+tags
+compile_commands.json
+.cache/
+.ccls-cache/
+
+# --- Operating system junk ---------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# --- Logs and scratch --------------------------------------------------------
+*.log
+scratch/
+tmp/
+temp/
+
+# --- Captures ----------------------------------------------------------------
+# Capture files are large, and instructor-supplied ones do not belong in your
+# repository. If an assignment asks you to submit a capture you produced
+# yourself, un-ignore that specific file:
+#     !evidence.pcapng
+*.pcap
+*.pcapng
+*.cap
+
+# --- Secrets -----------------------------------------------------------------
+# Nothing in this course requires a real credential, and a key committed to
+# GitHub is public the moment you push. Deleting it later does not remove it
+# from the history.
+*.pem
+*.key
+id_rsa
+id_ed25519
+.env
+secrets.*
+credentials.*
