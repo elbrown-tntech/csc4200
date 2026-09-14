@@ -21,8 +21,8 @@ set -Eeuo pipefail
 GREEN='\033[0;32m'; BLUE='\033[0;34m'; RED='\033[0;31m'; YELLOW='\033[0;33m'; NC='\033[0m'
 
 COURSE="CSC4200"
-COURSE_DIR="$HOME/csc4200"
-LOG_FILE="$HOME/csc4200_setup.log"
+COURSE_DIR="$HOME/csc4200-work"
+LOG_FILE="$HOME/csc4200-setup.log"
 INSTALL_SCANNING_TOOLS=0
 
 for arg in "$@"; do
@@ -139,9 +139,19 @@ sudo apt-get install -y "${PACKAGES[@]}"
 # -----------------------------------------------------------------------------
 # 2. Course directory
 # -----------------------------------------------------------------------------
-echo -e "${GREEN}[3/6] Preparing course directory at ${COURSE_DIR}...${NC}"
-mkdir -p "$COURSE_DIR"/{pa1,pa2,captures,scratch}
-echo -e "${BLUE}    Created: pa1/ pa2/ captures/ scratch/${NC}"
+echo -e "${GREEN}[3/6] Preparing your workspace at ${COURSE_DIR}...${NC}"
+mkdir -p "$COURSE_DIR"/{captures,scratch}
+echo -e "${BLUE}    Created: captures/ scratch/${NC}"
+# Deliberately NOT created: pa1/ pa2/. Those arrive as clones of the student's
+# own assignment repositories. Pre-creating them invites work in the wrong place.
+
+# Guard against the workspace becoming a repository, which would nest the
+# assignment repos inside it and corrupt the commit history they are graded on.
+if [ -d "$COURSE_DIR/.git" ]; then
+    echo -e "${RED}[!] ${COURSE_DIR} is a git repository. It should not be.${NC}"
+    echo -e "    Assignment repositories are cloned INSIDE this folder; the"
+    echo -e "    folder itself must stay an ordinary directory. See Lab 0 section 8."
+fi
 
 # -----------------------------------------------------------------------------
 # 3. Python environment
@@ -168,15 +178,10 @@ pip install --quiet \
 
 deactivate
 
-# Convenience alias, so nobody spends Week 5 wondering why 'import Crypto' fails.
-if ! grep -q "alias csc4200" "$HOME/.bashrc" 2>/dev/null; then
-    {
-        echo ""
-        echo "# --- CSC 4200 Computer Networks ---"
-        echo "alias csc4200='cd ~/csc4200 && source ~/csc4200/venv/bin/activate'"
-    } >> "$HOME/.bashrc"
-    echo -e "${BLUE}    Added shell alias 'csc4200' to activate the environment.${NC}"
-fi
+# No shell alias is installed. Students activate the environment with the two
+# commands shown at the end of this script and in Lab 0 section 8 -- 'cd' and
+# 'source' transfer to every future course; a course-specific alias does not,
+# and it fails silently in non-interactive shells and under sudo.
 
 # -----------------------------------------------------------------------------
 # 4. Capture permissions
@@ -230,14 +235,16 @@ echo -e "${GREEN}  SETUP COMPLETE${NC}"
 echo -e "${GREEN}=============================================================${NC}"
 echo ""
 echo -e "  Next step - run the verification script:"
-echo -e "      cd ~/csc4200"
+echo -e "      cd ~/csc4200-work"
 echo -e "      source venv/bin/activate"
-echo -e "      python3 verify_env.py"
+echo -e "      python3 ~/csc4200-course/lab0/verify_env.py"
 echo ""
-echo -e "  It writes ${BLUE}lab0_report.txt${NC}. That file is your Lab 0 submission."
+echo -e "  It writes ${BLUE}~/csc4200-work/lab0_report.txt${NC}."
+echo -e "  That file is your Lab 0 submission."
 echo ""
-echo -e "  Shortcut for the rest of the semester: type ${BLUE}csc4200${NC}"
-echo -e "  (open a new terminal first, so the alias loads)."
+echo -e "  Every work session from here starts the same way:"
+echo -e "      cd ~/csc4200-work"
+echo -e "      source venv/bin/activate      ${BLUE}# Python only; skip it for C${NC}"
 echo ""
 echo -e "  Connect from VS Code with:  ssh ${USER}@${CURRENT_IP}"
 echo -e "${GREEN}=============================================================${NC}"

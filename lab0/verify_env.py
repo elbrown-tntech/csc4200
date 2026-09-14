@@ -6,7 +6,9 @@ Checks that this machine can actually do the things the programming
 assignments require, then writes lab0_report.txt for submission.
 
 Run inside the course virtual environment:
-    cd ~/csc4200 && source venv/bin/activate && python3 verify_env.py
+    cd ~/csc4200-work
+    source venv/bin/activate
+    python3 ~/csc4200-course/lab0/verify_env.py
 """
 
 import os
@@ -62,9 +64,9 @@ def check_virtualenv() -> bool:
         print(f"{YELLOW} The Python library checks below will fail even if the{RESET}")
         print(f"{YELLOW} libraries are installed correctly. Run this first:{RESET}")
         print()
-        print("     cd ~/csc4200")
+        print("     cd ~/csc4200-work")
         print("     source venv/bin/activate")
-        print("     python3 verify_env.py")
+        print("     python3 ~/csc4200-course/lab0/verify_env.py")
         print()
     return ok
 
@@ -215,6 +217,26 @@ def check_loopback_socket() -> bool:
     return ok
 
 
+def check_workspace_not_a_repo() -> bool:
+    """Warning only. The workspace must stay an ordinary directory.
+
+    If ~/csc4200-work is itself a git repository, every assignment repo cloned
+    into it is nested, and the commit history both programming assignments are
+    graded on stops behaving predictably. Cheaper to catch in week 2.
+    """
+    workspace = os.path.join(os.path.expanduser("~"), "csc4200-work")
+    is_repo = os.path.isdir(os.path.join(workspace, ".git"))
+    ok = not is_repo
+    marker = f"{GREEN}[  OK  ]{RESET}" if ok else f"{YELLOW}[ WARN ]{RESET}"
+    label = "ordinary directory (correct)" if ok else "IS a git repository -- it should not be"
+    print(f" {marker} workspace: {label}")
+    record(f"[{'OK' if ok else 'WARN'}] workspace is not a git repository: {ok}")
+    if is_repo:
+        print(f"{YELLOW}          Assignment repositories are cloned INSIDE this folder.{RESET}")
+        print(f"{YELLOW}          The folder itself must not be one. See Lab 0 section 8.{RESET}")
+    return ok
+
+
 def check_git_identity() -> bool:
     """Warning only. Not counted toward the pass total."""
     def cfg(key):
@@ -289,7 +311,8 @@ def main() -> int:
     results.append(check_loopback_socket())
 
     section("Advisory")
-    check_git_identity()  # warning only
+    check_workspace_not_a_repo()  # warning only
+    check_git_identity()          # warning only
 
     passed = sum(1 for r in results if r)
     total = len(results)
@@ -311,7 +334,7 @@ def main() -> int:
     footer.append("=" * 62)
     REPORT_LINES.extend(footer)
 
-    report_path = os.path.join(os.path.expanduser("~"), "csc4200", "lab0_report.txt")
+    report_path = os.path.join(os.path.expanduser("~"), "csc4200-work", "lab0_report.txt")
     try:
         os.makedirs(os.path.dirname(report_path), exist_ok=True)
         with open(report_path, "w") as handle:
