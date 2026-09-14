@@ -163,3 +163,16 @@ networking they do every year.
 
 If you find an error in anything here, say so. Corrections are welcome and
 genuinely useful.
+
+---
+
+## License
+
+Course materials in this repository are licensed under
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). The
+scripts and starter code are licensed under the MIT License. See
+[LICENSE.md](LICENSE.md) for the details, including what is *not* covered —
+IEEE and IETF standards documents, third-party tools, and student work.
+
+Other educators, and other NCAE-C designated programs in particular, are
+welcome to use and adapt this material with attribution.
