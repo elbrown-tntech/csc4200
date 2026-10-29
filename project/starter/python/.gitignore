@@ -1,0 +1,28 @@
+# Build output
+*.o
+etp-server.bin
+etp-client.bin
+build/
+__pycache__/
+*.pyc
+
+# Editor and OS clutter
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Server data directories used while testing
+server-files/
+scratch/
+downloads/
+
+# Captures: ignore everything except the one capture you submit
+*.pcap
+*.pcapng
+!evidence/pa1-capture.pcap
+
+# Never commit secrets
+*.key
+*.pem
+.env

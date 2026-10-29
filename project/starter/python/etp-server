@@ -1,0 +1,3 @@
+#!/bin/sh
+# Launches the Python server. The self-check and the grader run ./etp-server.
+exec python3 "$(dirname "$0")/src/server.py" "$@"
