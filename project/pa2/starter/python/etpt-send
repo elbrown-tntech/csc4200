@@ -1,0 +1,3 @@
+#!/bin/sh
+# Launches the Python sender. The self-check, the harness and the grader run ./etpt-send.
+exec python3 "$(dirname "$0")/src/etpt_send.py" "$@"

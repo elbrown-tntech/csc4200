@@ -8,6 +8,7 @@ the **Project Handbook**, the **ETP/1 Specification**, and the **PA1 brief**.
 | `etp_selfcheck.py` | Runs the same execution tests the grader runs. Use it often. |
 | `starter/python/` | Python starter: launchers, Makefile, skeleton, templates |
 | `starter/c/` | C starter: headers, Makefile, skeleton, templates |
+| `pa2/` | **PA2:** the relay, the measurement harness, the PA2 self-check and starters. See `pa2/README.md`. |
 
 ## Start your PA1 repository
 

@@ -1,0 +1,29 @@
+# Build output
+*.o
+etpt-send.bin
+etpt-recv.bin
+build/
+__pycache__/
+*.pyc
+
+# Editor and OS clutter
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Server data directories used while testing
+server-files/
+scratch/
+downloads/
+
+# Captures: ignore everything except the one capture you submit
+*.pcap
+*.pcapng
+!evidence/pa2-capture.pcap
+!evidence/pa2-capture.pcapng
+
+# Never commit secrets
+*.key
+*.pem
+.env
